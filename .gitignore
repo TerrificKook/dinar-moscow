@@ -1,0 +1,19 @@
+# Секреты и локальная конфигурация
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Локальные кэши и служебные вложения
+.cache/
+cache/
+__pycache__/
+node_modules/
+.codex-remote-attachments/
+attachments/
+
+# Локальные и приватные рабочие материалы
+output/
+tmp/
+private/
