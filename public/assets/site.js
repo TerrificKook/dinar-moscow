@@ -8,12 +8,3 @@ if (menu && nav) {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { close(); menu.focus(); } });
   nav.addEventListener('click', e => { if (e.target.closest('a')) close(); });
 }
-document.querySelectorAll('[data-layers]').forEach(button => {
-  button.hidden = false;
-  button.addEventListener('click', () => {
-    const expanded = button.getAttribute('aria-pressed') !== 'true';
-    button.setAttribute('aria-pressed', String(expanded));
-    button.closest('.drawing').classList.toggle('exploded', expanded);
-    button.textContent = expanded ? 'Собрать комплект ↙' : 'Рассмотреть по слоям ↗';
-  });
-});
