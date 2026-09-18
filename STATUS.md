@@ -63,7 +63,7 @@ Microsoft Edge через Playwright, эмуляция 1440, 390, 768 и 320 px.
 
 Разрешение владельца: push preview v02 в GitHub Pages, без подключения dinar.moscow, индексации и рекламы. При начале v02 существующий Pages был настроен на main /; CNAME отсутствовал. Добавлен workflow .github/workflows/preview.yml: публикация только public/. Исследование, внутренние документы и output/ в Pages не включаются.
 
-Preview: https://terrifickook.github.io/dinar-moscow/. Meta robots noindex,nofollow и robots.txt сохранены. DNS и пользовательский домен не подключаются. Сохранение в Git и успешный Pages deployment проверяются раздельно.
+Preview: https://terrifickook.github.io/dinar-moscow/. Meta robots noindex,nofollow и robots.txt сохранены. DNS и пользовательский домен не подключаются. Код v02: коммит 40b4b48 отправлен в origin/main. Workflow Publish preview завершился успешно: https://github.com/TerrificKook/dinar-moscow/actions/runs/35358283375. После deployment проверены все четыре публичные страницы (HTTP 200, Preview v02, noindex, изображения); research/README.md, STATUS.md, SHOT_LIST.md, .git/config и CNAME возвращают 404. CNAME в Pages отсутствует. Скриншоты опубликованного первого экрана: output/v02/published-home-1440.png и published-home-390.png.
 
 В коммит v02 входят только public/, scripts/, .github/workflows/preview.yml, README.md, STATUS.md и SHOT_LIST.md. research/ и свалка/ остаются локальными.
 
