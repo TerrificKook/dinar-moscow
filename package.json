@@ -1,0 +1,6 @@
+{
+  "name": "dinar-moscow",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node scripts/build.mjs", "start": "node scripts/serve.mjs", "check": "node --check public/assets/site.js && node --check scripts/build.mjs && node --check scripts/serve.mjs" }
+}
