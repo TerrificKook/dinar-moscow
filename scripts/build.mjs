@@ -33,7 +33,7 @@ function contact(p) { return `<section class="contact-band" id="contact"><div cl
   <p>Пришлите фотографию, эскиз или пару слов о задаче.<br>Первое обсуждение заказа — бесплатно.</p>
   ${button('Написать в Telegram','https://t.me/mrdinar',true)}</div>
   <div class="contact-aside">${portrait(p,'contact-portrait')}<p>Динар Динмухаметов<br><span>Ваш собеседник на всём пути</span></p>
-  <div class="direct-links"><a href="tel:+79958815095">+7 (995) 881-50-95 ${arrow}</a><a href="mailto:db@dinardb.ru">db@dinardb.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
+  <div class="direct-links"><a href="tel:+79057011177">+7 (905) 701-11-77 ${arrow}</a><a href="mailto:db@dinardb.ru">db@dinardb.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
   <p class="contact-note">Макеты и файлы можно приложить в выбранном мессенджере.</p>
 </div></section>`; }
 
