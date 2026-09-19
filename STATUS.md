@@ -21,6 +21,8 @@
 
 Для приёмки: https://terrifickook.github.io/dinar-moscow/. Публикуется только public/ прежним workflow; research/, output/ и внутренние документы в Pages не входят. Снятие noindex и подключение dinar.moscow требуют отдельной задачи.
 
+Публикация v03 подтверждена 19.09.2026: код в коммите a0c4db3 отправлен в origin/main. Все 12 публичных страниц возвращают HTTP 200, Preview v03, noindex и один H1; четыре белых изображения доступны. CNAME, research/README.md, STATUS.md, SHOT_LIST.md и .git/config возвращают 404. Конфигурация Pages: workflow, cname null. Результат проверки: output/v03/published-checks.json; скриншоты публичного первого экрана — published-home-1440.png и published-home-390.png. Статус отдельного запуска Actions через API не получен из-за сетевого тайм-аута; публикация проверена непосредственно на публичном сайте.
+
 Далее — замечания владельца по preview, реальные фото по SHOT_LIST.md и, при предоставлении, уточнение биографии по резюме. Ниже сохранена история предыдущих этапов.
 
 ## Исследование спроса
