@@ -77,3 +77,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ac
 .personal-copy{min-width:0}
 @media(max-width:360px){.personal-copy h2{font-size:38px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Actual portrait proportions and fully visible shoot reference. */
+.working-photo img{height:auto;aspect-ratio:3/4;object-fit:contain}
+.working-photo{align-self:center}
+.portrait-caption{background:rgba(247,245,239,.96);padding:12px 16px;right:18px;bottom:24px;color:#292829}
+.working-photo span{position:static;display:block;font:12px/1.5 Manrope,sans-serif;padding:12px 0;color:#fff;transform:none}
+.personal-photo.working-photo{width:100%}
+@media(max-width:700px){.portrait-caption{display:none}}
+.brand-experience{margin:40px 0;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.brand-names{font-size:clamp(24px,3vw,38px);line-height:1.5;letter-spacing:-.03em;color:var(--wine)}
+@media(max-width:700px){.working-photo img{height:auto;max-height:none}.personal-photo.working-photo{margin-bottom:16px}}
