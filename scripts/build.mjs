@@ -66,7 +66,7 @@ const home = `<div class="container">
 </section>
 </div>
 <section class="personal-band"><div class="container personal-inner">
-  <div class="personal-photo working-photo"><img src="./assets/dinar-working-v04.webp" width="1086" height="1448" alt="Эскиз фотосъёмки: Динар с белой коробкой и ложементом. Сгенерированная сцена." loading="lazy"><span>Эскиз будущей фотосъёмки · AI</span></div>
+  <div class="personal-photo working-photo"><img src="./assets/dinar-working-v05.webp" width="1086" height="1448" alt="Эскиз фотосъёмки: Динар с белой коробкой и ложементом. Сгенерированная сцена." loading="lazy"><span>Эскиз будущей фотосъёмки · AI</span></div>
   <div class="personal-copy">${label('Опыт — в каждом решении')}<h2>Вы говорите<br>со мной.<br><em>Я довожу<br>до изделия.</em></h2><p>Разберусь в вашем продукте, организую разработку и образцы. Вместе проверим конструкцию, выберем материалы и согласуем результат перед тиражом.</p>
     <div class="experience"><div><strong>С 2001</strong><span>в рекламных агентствах<br>и производственных компаниях</span></div></div>
     ${textLink('Мой опыт и подход','./about/')}
@@ -114,8 +114,12 @@ for(const [slug,title,description,body] of pages){
   const html=`<!doctype html>
 <html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#f7f5ef">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#f7f5ef">
 <title>${title}</title><meta name="description" content="${description}">
+<link rel="canonical" href="https://dinar.moscow/${slug ? slug+'/' : ''}">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="${title}"><meta property="og:description" content="${description}">
+<meta property="og:url" content="https://dinar.moscow/${slug ? slug+'/' : ''}"><meta property="og:image" content="https://dinar.moscow/assets/dinar-portrait-v04.webp">
 <link rel="icon" href="${p}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${p}assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script>
@@ -125,9 +129,12 @@ for(const [slug,title,description,body] of pages){
 <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Меню <span aria-hidden="true">+</span></button>
 <nav id="navigation" aria-label="Основная навигация">${nav}<a class="nav-contact" href="#contact">Обсудить задачу ${arrow}</a></nav></header>
 <main id="main">${body}${contact(p)}</main>
-<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><span>Preview v04</span></p></footer>
+<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов</p></footer>
 </body></html>`;
   await mkdir(new URL(slug?slug+'/':'./',root),{recursive:true});
   await writeFile(new URL((slug?slug+'/':'')+'index.html',root),html);
 }
-console.log(`v04: ${pages.length} страниц созданы в public/`);
+await writeFile(new URL('sitemap.xml',root), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([slug])=>`  <url><loc>https://dinar.moscow/${slug ? slug+'/' : ''}</loc></url>`).join('\n')}\n</urlset>\n`);
+await writeFile(new URL('robots.txt',root), 'User-agent: *\nAllow: /\nSitemap: https://dinar.moscow/sitemap.xml\n');
+console.log(`v05: ${pages.length} страниц созданы в public/`);
+
