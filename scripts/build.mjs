@@ -129,7 +129,7 @@ for(const [slug,title,description,body] of pages){
 <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Меню <span aria-hidden="true">+</span></button>
 <nav id="navigation" aria-label="Основная навигация">${nav}<a class="nav-contact" href="#contact">Обсудить задачу ${arrow}</a></nav></header>
 <main id="main">${body}${contact(p)}</main>
-<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов</p></footer>
+<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><a href="${p}privacy/">О данных на сайте</a></p></footer>
 </body></html>`;
   await mkdir(new URL(slug?slug+'/':'./',root),{recursive:true});
   await writeFile(new URL((slug?slug+'/':'')+'index.html',root),html);
