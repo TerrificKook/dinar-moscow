@@ -122,7 +122,7 @@ for(const [slug,title,description,body] of pages){
 <meta property="og:url" content="https://dinar.moscow/${slug ? slug+'/' : ''}"><meta property="og:image" content="https://dinar.moscow/assets/dinar-portrait-v04.webp">
 <link rel="icon" href="${p}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${p}assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script>
+<link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script><script src="${p}assets/consent-metrika.js" defer></script>
 </head><body class="${slug.startsWith('articles/')?'article-page':slug||'home'}">
 <a class="skip" href="#main">К содержанию</a>
 <header class="header container"><a class="brand" href="${p}" aria-label="Динар — главная">Динар<span>.</span><small>Динмухаметов</small></a>
