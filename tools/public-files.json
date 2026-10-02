@@ -1,4 +1,7 @@
 {
   "source": "public",
-  "dirs": []
+  "dirs": [],
+  "domain": "dinar.moscow",
+  "site_url": "https://dinar.moscow/",
+  "repository": "TerrificKook/dinar-moscow"
 }

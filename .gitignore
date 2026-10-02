@@ -18,3 +18,4 @@ output/
 tmp/
 private/
 /dist-regru/
+*.py[cod]
