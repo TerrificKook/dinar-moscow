@@ -3,5 +3,6 @@
   "dirs": [],
   "domain": "dinar.moscow",
   "site_url": "https://dinar.moscow/",
-  "repository": "TerrificKook/dinar-moscow"
+  "repository": "TerrificKook/dinar-moscow",
+  "remote_python": "/opt/python/python-3.8.8/bin/python"
 }
