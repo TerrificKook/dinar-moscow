@@ -1,3 +1,12 @@
+## Подготовка REG.RU - 02.10.2026
+
+В отдельной ветке `codex/regru-migration-20261002` подготовлены workflow доставки,
+публичный упаковщик с version.json, проверка путей и откат управляемых файлов.
+Это подготовка; main, DNS и работающий сайт этим этапом не изменены. Новые доступы
+подтверждены этапом А; перенос этого сайта - своей контрольной точкой. SSH-host
+key внешнего порта пока не подтверждён доверенным источником. Подробности схемы -
+`docs/regru-publishing.md`; закрытые снимки и подтверждения остаются вне репозитория.
+
 ## Контактная почта — 2 октября 2026
 
 По заданию владельца адрес заменён на db@dinardb.ru в шаблоне, на 12 страницах сайта и странице о данных; ссылка mailto обновлена. Контакт синхронизирован во внутренней документации. Сборка, проверка синтаксиса и проверка diff пройдены. Коммит a0135e8 отправлен в origin/main по разрешению владельца. GitHub Actions 37002160673 завершился success. После публикации все 13 страниц проверены по HTTPS: HTTP 200, новый адрес и mailto присутствуют, старый адрес отсутствует.
@@ -136,3 +145,7 @@ Preview: https://terrifickook.github.io/dinar-moscow/. Meta robots noindex,nofol
 ## Перед будущей рекламой
 
 Проверить первичные подтверждения ключевых цифр, расширить коммерческие синонимы, разделить коробки и отдельные ложементы, перепроверить аномально низкий CPC. 28 строк исследования и прогноз по 8 фразам не доказывают достаточный поток продаж. Запись «все площадки» не подтверждает расчёт РСЯ: стандартный прогноз относится к основному Поиску (https://yandex.ru/support/direct/ru/troubleshooting/stat). Сырые значения исследования не переписывались. Реклама не запускалась.
+
+## REG.RU migration checkpoint V - 03 October 2026
+
+The owner approved sequential Moscow and Agency migration. The public-only package includes the explicit root .htaccess to enforce the canonical HTTPS apex and preserve ACME/path/query. The Apache handler and copy are verified before the web DNS switch. Production acceptance requires real manual/push deployments, matching public SHA, rollback/restore, visual checks and HTTP SSL configuration; no analytics or mail changes.
