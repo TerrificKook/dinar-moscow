@@ -28,3 +28,8 @@ Public version.json must match the expected SHA over verified HTTPS.
 Do not merge the preparation branch before the site's transfer approval. A merge
 can also trigger the existing GitHub Pages publishing. Old Pages settings remain
 available as part of the rollback plan and are not disabled by this workflow.
+
+The canonical HTTPS host is enforced by a managed root .htaccess. For generated
+public/ output, only this explicit repository-root configuration is copied in.
+Nested .htaccess and all other hidden files remain forbidden. The Apache handler
+and preserved ACME exception must be verified before the web DNS switch.
