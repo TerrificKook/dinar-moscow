@@ -1,3 +1,4 @@
+// REG.RU automatic publication smoke test.
 import { mkdir, writeFile } from 'node:fs/promises';
 import { products, articles } from './content.mjs';
 
