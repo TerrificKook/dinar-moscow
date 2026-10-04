@@ -149,3 +149,8 @@ Preview: https://terrifickook.github.io/dinar-moscow/. Meta robots noindex,nofol
 ## REG.RU migration checkpoint V - 03 October 2026
 
 The owner approved sequential Moscow and Agency migration. The public-only package includes the explicit root .htaccess to enforce the canonical HTTPS apex and preserve ACME/path/query. The Apache handler and copy are verified before the web DNS switch. Production acceptance requires real manual/push deployments, matching public SHA, rollback/restore, visual checks and HTTP SSL configuration; no analytics or mail changes.
+
+
+## REG.RU delivery hardening - 4 October 2026
+
+The owner approved fixed per-site SSH commands and bounded archive retention. The site is served by REG.RU; GitHub main remains the source for automatic publication. The deployment key rejects arbitrary commands, SFTP and other site roots. Public HTTPS verification precedes archive cleanup. Current/previous and pinned migration copies remain protected; old Pages is retained until a separate decision after the rollback window. See docs/regru-publishing.md. No DNS, mail, analytics or public content change.
