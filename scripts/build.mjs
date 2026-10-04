@@ -1,4 +1,3 @@
-// REG.RU automatic publication smoke test.
 import { mkdir, writeFile } from 'node:fs/promises';
 import { products, articles } from './content.mjs';
 
@@ -10,18 +9,18 @@ const textLink = (text, href) => `<a class="text-link" href="${href}">${text}${a
 const portrait = (p, cls='', eager=false) => `<img class="${cls}" src="${p}assets/dinar-portrait-v04.webp" width="1086" height="1448" alt="Динар Динмухаметов — портрет с ретушью" ${eager?'fetchpriority="high"':'loading="lazy"'}>`;
 const imageNames = { 'white-boxes':'Белые коробки: крышка-дно, складная с клапаном и с окном', 'white-insert':'Белая жёсткая коробка с картонным ложементом под набор', 'white-displays':'Белый лоток SRP и многоуровневый прикассовый дисплей', 'white-stands':'Белые картонные стойки: высокая напольная и низкая широкая' };
 const concept = (p, kind, cls='', eager=false) => `<figure class="concept ${cls}"><img src="${p}assets/${kind}.webp" width="1536" height="1024" alt="${imageNames[kind]}. Сгенерированная иллюстрация конструкции." ${eager?'fetchpriority="high"':'loading="lazy"'}><figcaption>${cls.includes('hero-object')?'Беляк · иллюстрация':'Иллюстрация конструкции · не фото выполненного заказа'}</figcaption></figure>`;
-const person = p => `<a class="person" href="${p}about/">${portrait(p)}<span><b>Динар Динмухаметов</b><small>Лично веду ваш заказ</small></span>${arrow}</a>`;
+const person = p => `<a class="project-owner" href="${p}about/">Личное ведение — Динар Динмухаметов ${arrow}</a>`;
 const card = (p, item) => `<article class="product-card"><a class="product-image" href="${p}${item.slug}/" aria-label="${item.name}: подробнее">${concept(p,item.image)}</a><div class="product-copy"><h3><a href="${p}${item.slug}/">${item.name} ${arrow}</a></h3><p>${item.short}</p></div></article>`;
 const reading = (p, ids, heading='Разобраться до заказа') => `<section class="section reading"><div class="section-heading">${label('Полезное об упаковке')}<h2>${heading}</h2></div><div class="reading-list">${ids.map(id=>{const a=articles.find(a=>a.slug===id);return `<a class="reading-link" href="${p}articles/${a.slug}/"><span class="reading-category">${a.category}</span><h3>${a.title}</h3>${arrow}</a>`}).join('')}</div>${textLink('Все материалы',`${p}articles/`)}</section>`;
 
 const process = `<section class="section process" id="process">
-  <div class="section-heading">${label('Как я работаю')}<h2>От первого разговора<br>до готового тиража.</h2></div>
+  <div class="section-heading">${label('Как проходит работа')}<h2>От задачи — к образцу.<br><em>От образца — к тиражу.</em></h2></div>
   <div class="steps">
     ${[
-      ['Ваш продукт','Получаю товар или его параметры. Уточняем задачу, комплектацию и нужные тиражи.'],
-      ['Белый образец','Разрабатываем конструкцию, подгоняем размеры коробки и ложемента. Проверяем посадку товара на беляке и вносим правки.'],
+      ['Ваша задача','Получаю товар или его параметры. Согласуем состав работы: разработка, изготовление образца или подготовка тиража.'],
+      ['Конструкция и образец','Организую разработку и изготовление белого образца. Проверяем размеры, размещение товара и сборку, уточняем необходимые правки.'],
       ['Внешний вид','Подбираем материалы и отделку. Согласуем цветной образец и фиксируем спецификацию изделия.'],
-      ['Расчёт и тираж','По утверждённой спецификации рассчитываю нужные количества. После согласования организую изготовление и контролирую результат.']
+      ['Тираж по согласованию','Разработку и образец можно заказать отдельно. Если нужен тираж, рассчитываю количества по согласованной спецификации и организую изготовление.']
     ].map(([title,text])=>`<article><h3>${title}</h3><p>${text}</p></article>`).join('')}
   </div>
 </section>`;
@@ -34,7 +33,7 @@ const terms = `<section class="section terms">
 
 function contact(p) { return `<section class="contact-band" id="contact"><div class="container contact-inner">
   <div class="contact-title">${label('Начнём с разговора')}<h2>Расскажите,<br>что вы <em>задумали.</em></h2>
-  <p>Пришлите фото товара, размеры и примерное количество.<br>Помогу определить, с чего начать разработку.</p>
+  <p>Пришлите фото товара, размеры и вашу задачу.<br>Укажите, нужен образец или тираж. Готовое ТЗ необязательно.</p>
   ${button('Написать в Telegram','https://t.me/mrdinar',true)}</div>
   <div class="contact-aside"><p>Динар Динмухаметов<br><span>Ваш собеседник на всём пути</span></p>
   <div class="direct-links"><a href="https://t.me/mrdinar">Telegram @mrdinar ${arrow}</a><a href="tel:+79057011177">+7 (905) 701-11-77 ${arrow}</a><a href="mailto:db@dinardb.ru">db@dinardb.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
@@ -42,50 +41,56 @@ function contact(p) { return `<section class="contact-band" id="contact"><div cl
 </div></section>`; }
 
 const home = `<div class="container">
-<section class="hero home-hero">
-  <div class="hero-copy">${label('Динар Динмухаметов · лично веду ваш заказ')}
-    <h1>Коробки<br>и дисплеи<br><em>под ваш товар.</em></h1>
-    <p class="hero-description">Разработка конструкции, образец и тираж для компаний. Подгоним упаковку под ваш продукт, согласуем внешний вид и изготовим нужное количество.</p>
-    <div class="actions">${button('Обсудить изготовление')}${textLink('Как я работаю','#process')}</div>
-    <p class="micro">На заказ · по вашим размерам · работа с юрлицами</p>
+<section class="hero solution-hero">
+  <div class="hero-copy">${label('Упаковка и выкладка товара · для бизнеса')}
+    <h1>Коробки и дисплеи<br><em>под ваш товар.</em></h1>
+    <p class="hero-description">Разработка конструкции, изготовление образца и организация тиража. Помогу пройти путь от идеи до изделия — с подбором производства и контролем исполнения.</p>
+    <p class="sample-entry">Разработку и образец можно заказать отдельно.</p>
+    <div class="actions">${button('Обсудить задачу')}${textLink('Разработка и образец','#sample-development')}</div>
+    <p class="micro">По вашим размерам · можно начать без готового ТЗ</p>
   </div>
-  <div class="hero-visual">${portrait('./','hero-portrait',true)}
-    <div class="portrait-caption"><b>Динар Динмухаметов</b><span>В рекламном производстве с 2001 года</span></div>
-    ${concept('./','white-insert','hero-object',true)}
+  <div class="solution-visual">${concept('./','white-insert','solution-image',true)}<p class="visual-note">Проверка перед тиражом.<br><em>Размеры, посадка товара, сборка.</em></p></div>
+</section>
+<section class="section needs-section">
+  <div class="section-heading">${label('С чем можно обратиться')}<h2>Понятный следующий шаг<br><em>для вашей задачи.</em></h2></div>
+  <div class="needs-grid">
+    <article><h3>Есть товар, нет конструкции</h3><p>Помогу определить требования к упаковке или дисплею и организую разработку под размеры и свойства товара.</p></article>
+    <article><h3>Нужен физический образец</h3><p>Организую изготовление, чтобы проверить посадку товара, сборку и удобство использования до решения о тираже.</p></article>
+    <article><h3>Сложно выбрать производство</h3><p>Подберу исполнителя под конструкцию, материал, отделку и количество. Уточню состав работ и условия.</p></article>
+    <article><h3>Нужно довести заказ до результата</h3><p>Возьму на себя согласования с производством и контроль исполнения по утверждённому образцу и спецификации.</p></article>
   </div>
 </section>
-<section class="intro section">
-  ${label('Человек, которому можно поручить производство')}
-  <div><h2 class="statement">У вас — идея.<br>У меня — опыт, чтобы<br><em>довести её до изделия.</em></h2>
-  <div class="intro-bottom"><p>Нужно изготовить коробку, дисплей или стойку, но непонятно, кому поручить заказ? Я уточню требования, организую образец и лично проконтролирую выполнение.</p>${textLink('Познакомиться ближе','./about/')}</div></div>
+<section class="sample-service" id="sample-development">
+  <div>${label('Отдельная услуга')}<h2>Разработка<br>и изготовление<br><em>образца.</em></h2><p class="body-large">Проверить решение на вашем товаре — перед тем, как заказывать тираж.</p><div class="actions">${button('Обсудить образец')}${textLink('Как проверяем образец','./articles/belyak-i-obrazec/')}</div></div>
+  <div class="sample-service-copy"><p>Для коробки, ложемента, шоубокса или картонной стойки. Можно обратиться с идеей, фотографией похожего изделия или готовым заданием.</p><ul><li>Уточнение задачи и разработка конструкции.</li><li>Изготовление физического образца под ваш продукт.</li><li>Проверка размеров, размещения товара и сборки.</li><li>Согласование правок, материалов и следующего этапа.</li></ul><p>Белый образец помогает проверить конструкцию. Цветной образец, печать и отделку обсуждаем отдельно.</p><p class="sample-terms">Состав работ, стоимость и сроки согласуем по вашей задаче. Решение о тираже можно принять после образца.</p></div>
 </section>
 <section class="section products" id="products">
-  <div class="section-heading">${label('Что нужно изготовить')}<h2>В центре внимания —<br><em>ваш продукт.</em></h2></div>
-  <div class="product-grid">${[products[0],products[3],products[1],products[2]].map(item=>card('./',item)).join('')}</div>
+  <div class="section-heading">${label('Что нужно изготовить')}<h2>Упаковать продукт.<br><em>Подготовить выкладку.</em></h2></div>
+  <div class="product-grid">${[products[1],products[2],products[0],products[3]].map(item=>card('./',item)).join('')}</div>
   <p class="gallery-note">Белые образцы помогают увидеть конструкцию без брендинга. Это сгенерированные иллюстрации, не портфолио. Для вашего заказа разработаем и согласуем физический образец.</p>
   <div class="run-note"><h3>Нужны 500 или 1000 коробок?</h3><p>Обсудим оба тиража, материал и комплектацию. Это примеры количества для расчёта — возможность изготовления и условия зависят от изделия.</p>${textLink('Из чего складывается цена','./articles/tirazh-500-1000/')}</div>
 </section>
 </div>
 <section class="personal-band"><div class="container personal-inner">
-  <div class="personal-photo working-photo"><img src="./assets/dinar-working-v05.webp" width="1086" height="1448" alt="Эскиз фотосъёмки: Динар с белой коробкой и ложементом. Сгенерированная сцена." loading="lazy"><span>Эскиз будущей фотосъёмки · AI</span></div>
-  <div class="personal-copy">${label('Опыт — в каждом решении')}<h2>Вы говорите<br>со мной.<br><em>Я довожу<br>до изделия.</em></h2><p>Разберусь в вашем продукте, организую разработку и образцы. Вместе проверим конструкцию, выберем материалы и согласуем результат перед тиражом.</p>
+  <div class="personal-photo">${portrait('./')}<span>Динар Динмухаметов</span></div>
+  <div class="personal-copy">${label('Один ответственный за вашу задачу')}<h2>Лично веду заказ.<br><em>От первых вводных<br>до изготовления.</em></h2><p>Уточню требования, организую разработку и образец, согласую работу с производством. Вы знаете, к кому обратиться с вопросом на каждом этапе.</p>
     <div class="experience"><div><strong>С 2001</strong><span>в рекламных агентствах<br>и производственных компаниях</span></div></div>
     ${textLink('Мой опыт и подход','./about/')}
   </div>
 </div></section>
 <div class="container">
-<section class="section situations"><div>${label('Начните с того, что есть')}<h2>Готовое ТЗ?<br><em>Необязательно.</em></h2><p>Помогу понять, какой следующий шаг нужен именно вашей задаче.</p></div><div class="situation-list">
-  ${[['Есть идея, но нет ТЗ','Помогу перевести замысел в понятные требования к изделию.'],['Есть образец','Разберём конструкцию и то, что нужно сохранить или изменить.'],['Нужен новый тираж','Уточним параметры, проверим материалы и условия изготовления.'],['Есть расчёт, но есть сомнения','Можно отдельно разобрать смету и производственное решение.']].map(([t,p])=>`<details><summary>${t}<span aria-hidden="true">+</span></summary><p>${p}</p></details>`).join('')}
+<section class="section situations"><div>${label('Начните с того, что есть')}<h2>Ваш следующий<br><em>шаг.</em></h2><p>Для первого разговора достаточно описания задачи. Остальные вводные уточним вместе.</p></div><div class="situation-list">
+  ${[['Нужна только разработка и образец','Это отдельная услуга. Обсудим изделие, требования и вид образца. Стоимость и сроки согласуем до начала работы; тираж можно обсудить позже.'],['Есть идея, но нет ТЗ','Пришлите фотографию товара, размеры и пример того, что нравится. Помогу перевести замысел в требования к изделию.'],['Есть образец, который нужно изменить','Разберём конструкцию и то, что нужно сохранить или улучшить. Уточним материалы и организуем новый образец.'],['Нужен новый тираж','Уточним количество, проверим образец, материалы и условия изготовления.']].map(([t,p])=>`<details><summary>${t}<span aria-hidden="true">+</span></summary><p>${p}</p></details>`).join('')}
 </div></section>
-${process}${reading('./',['pripak-shouboks-srp','kak-vybrat-karton','belyak-i-obrazec'])}${terms}
+${process}${reading('./',['belyak-i-obrazec','pripak-shouboks-srp','kak-vybrat-karton'])}${terms}
 </div>`;
 
 function product(item) {
   return `<div class="container"><p class="breadcrumb"><a href="../">Главная</a><span>/</span>${item.name}</p>
-  <section class="hero product-hero"><div class="hero-copy">${label(item.eyebrow)}<h1>${item.heading}</h1><p class="hero-description">${item.lead}</p><div class="actions">${button(item.cta)}</div>${person('../')}</div><div class="product-hero-visual">${concept('../',item.image,'',true)}<p class="image-note">Формат для обсуждения.<br>Конструкцию разработаем под ваш товар.</p></div></section>
+  <section class="hero product-hero"><div class="hero-copy">${label(item.eyebrow)}<h1>${item.heading}</h1><p class="hero-description">${item.lead}</p><p class="sample-entry">Можно начать с разработки и изготовления образца.</p><div class="actions">${button(item.cta)}${textLink('Нужен образец','#sample-development')}</div>${person('../')}</div><div class="product-hero-visual">${concept('../',item.image,'',true)}<p class="image-note">Формат для обсуждения.<br>Конструкцию разработаем под ваш товар.</p></div></section>
   <section class="section product-intro"><div>${label('Продумано до тиража')}<h2>${item.intro}</h2></div><div><p class="body-large">${item.explanation}</p><p>${item.note}</p></div></section>
   <section class="section variants"><div class="section-heading">${label('Варианты под задачу')}<h2>Как это может<br><em>быть устроено.</em></h2></div><div class="variant-grid">${item.options.map(([t,p])=>`<article><h3>${t}</h3><p>${p}</p></article>`).join('')}</div></section></div>
-  <section class="sample-band"><div class="container sample-inner"><div>${label('Физический образец')}<h2>Проверяем<br><em>до производства.</em></h2><p>До тиража согласуем конструкцию и то, как будем оценивать результат.</p>${textLink('Что проверяет беляк','../articles/belyak-i-obrazec/')}</div><div class="checks">${item.checks.map(([t,p])=>`<article><h3>${t}</h3><p>${p}</p></article>`).join('')}</div></div></section>
+  <section class="sample-band" id="sample-development"><div class="container sample-inner"><div>${label('Можно заказать отдельно')}<h2>Разработка<br>и изготовление<br><em>образца.</em></h2><p>Организую разработку конструкции и изготовление физического образца. Проверим решение с вашим товаром. Состав работ, стоимость и сроки согласуем по задаче; тираж можно обсудить после образца.</p><div class="actions">${button('Обсудить образец')}</div>${textLink('Что проверяет беляк','../articles/belyak-i-obrazec/')}</div><div class="checks">${item.checks.map(([t,p])=>`<article><h3>${t}</h3><p>${p}</p></article>`).join('')}</div></div></section>
   <div class="container"><section class="section product-start"><div>${label('Для первого обсуждения')}<h2>Начните<br><em>с вашего товара.</em></h2></div><div><p>${item.brief}</p><p>Готовое техническое задание необязательно. Я помогу уточнить параметры и предложу следующий шаг.</p>${button(item.cta)}</div></section>${process}${terms}${reading('../',item.guides)}<div class="related-products"><p class="eyebrow">Другие задачи</p>${products.filter(p=>p.slug!==item.slug).map(p=>textLink(p.name,`../${p.slug}/`)).join('')}</div></div>`;
 }
 
@@ -103,7 +108,7 @@ const about=`<div class="container"><section class="hero about-hero"><div class=
 <div class="container"><section class="section about-principles"><article><h3>Один собеседник на всём пути</h3><p>Я лично разбираюсь в задаче и сопровождаю разработку, образцы и изготовление. Вы знаете, к кому обратиться с вопросом на любом этапе.</p></article><article><h3>Решение проверяем на образце</h3><p>Сначала примеряем продукт, уточняем конструкцию и выбираем материалы. Затем согласуем внешний вид и спецификацию, по которой рассчитывается тираж.</p></article></section>${process}${terms}</div>`;
 
 const pages=[
-  ['', 'Картонные коробки и дисплеи на заказ — Динар Динмухаметов','Организую изготовление коробок, шоубоксов и картонных стоек для юрлиц. Разработка конструкции, образец и тираж. Личное ведение заказа.',home],
+  ['', 'Коробки и дисплеи на заказ — разработка и изготовление образца','Разработка конструкции, изготовление образца и организация тиража коробок, шоубоксов и стоек для компаний. Разработку и образец можно заказать отдельно.',home],
   ...products.map(p=>[p.slug,p.title,p.description,product(p)]),
   ['about','Динар Динмухаметов — в рекламном производстве с 2001 года','Опыт в рекламных агентствах, производственных компаниях и закупках. Упаковка, припаки, тендеры и личное ведение вашего заказа.',about],
   ['articles','Полезное об упаковке — конструкции, материалы и заказ тиража','Практические статьи о картонных коробках, ложементах, SRP, припаках, образцах и отделке. Что учесть перед заказом производства.',journal],
@@ -120,7 +125,7 @@ for(const [slug,title,description,body] of pages){
 <link rel="canonical" href="https://dinar.moscow/${slug ? slug+'/' : ''}">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="${title}"><meta property="og:description" content="${description}">
-<meta property="og:url" content="https://dinar.moscow/${slug ? slug+'/' : ''}"><meta property="og:image" content="https://dinar.moscow/assets/dinar-portrait-v04.webp">
+<meta property="og:url" content="https://dinar.moscow/${slug ? slug+'/' : ''}"><meta property="og:image" content="https://dinar.moscow/assets/${slug==='about'?'dinar-portrait-v04':products.find(item=>item.slug===slug)?.image||articles.find(item=>'articles/'+item.slug===slug)?.image||'white-insert'}.webp">
 <link rel="icon" href="${p}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${p}assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script><script src="${p}assets/consent-metrika.js" defer></script>
@@ -137,5 +142,5 @@ for(const [slug,title,description,body] of pages){
 }
 await writeFile(new URL('sitemap.xml',root), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([slug])=>`  <url><loc>https://dinar.moscow/${slug ? slug+'/' : ''}</loc></url>`).join('\n')}\n</urlset>\n`);
 await writeFile(new URL('robots.txt',root), 'User-agent: *\nAllow: /\nSitemap: https://dinar.moscow/sitemap.xml\n');
-console.log(`v05: ${pages.length} страниц созданы в public/`);
+console.log(`v06: ${pages.length} страниц созданы в public/`);
 
