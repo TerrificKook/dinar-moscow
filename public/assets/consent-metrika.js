@@ -1,6 +1,6 @@
 "use strict";
 
-// Release gate: switch enabled on only after the site's notice and operator are approved.
+// Keep disabled until the RKN notification, processing details and consent notice are ready.
 (() => {
   const config = { enabled: false, counterId: 113163341, hosts: ["dinar.moscow", "www.dinar.moscow"], notice: "/privacy/analytics-consent/", contactGoal: "contact_click", contentGoal: "content_open", contentPaths: ["/kartonnye-korobki/", "/korobki-s-lozhementom/", "/shouboksy-displei/", "/kartonnye-stoyki/", "/articles/"] };
   if (!config.enabled || !Number.isSafeInteger(config.counterId) ||
@@ -158,7 +158,7 @@
     script.addEventListener("load", () => { script.dataset.loaded = "1"; });
     document.head.appendChild(script);
     window.ym(config.counterId, "init", {
-      defer: true, webvisor: true, clickmap: true, trackLinks: true,
+      defer: true, webvisor: false, clickmap: false, trackLinks: false,
       accurateTrackBounce: true, disableYtm: true, ecommerce: false, sendTitle: false,
       url, referrer: safeReferrer()
     });
@@ -189,7 +189,7 @@
     panel.className = "analytics-choice";
     panel.setAttribute("role", "region");
     panel.setAttribute("aria-label", "Выбор аналитики");
-    panel.innerHTML = `<p>Разрешаете Яндекс Метрику для анализа посещений, рекламы, кликов, прокрутки и записи действий без ввода текста? До выбора она не загружается. <a href="${config.notice}">Условия и текст согласия</a>.</p><div class="analytics-choice-actions"><button type="button" data-choice="allow">Разрешить аналитику</button><button type="button" data-choice="deny">Без аналитики</button></div><p class="analytics-error" hidden role="status">Не удалось сохранить выбор. На этой странице аналитика выключена; перед следующим посещением проверьте выбор снова.</p>`;
+    panel.innerHTML = `<p>Разрешаете Яндекс Метрику для статистики посещений, источников рекламы и переходов по контактам и материалам? Она использует cookie, IP-адрес и сведения о действиях на сайте. До разрешения Метрика не загружается. <a href="${config.notice}">Текст согласия</a> · <a href="/privacy/">О данных</a>.</p><div class="analytics-choice-actions"><button type="button" data-choice="allow">Разрешить аналитику</button><button type="button" data-choice="deny">Без аналитики</button></div><p class="analytics-error" hidden role="status">Не удалось сохранить выбор. На этой странице аналитика выключена; перед следующим посещением проверьте выбор снова.</p>`;
     panel.addEventListener("click", event => {
       const button = event.target.closest("button[data-choice]");
       if (!button) return;
@@ -232,9 +232,7 @@
     } else if (!channel && config.contentGoal) {
       const target = new URL(link.href);
       const path = target.pathname;
-      if (link.matches("[data-photo]") && /hudwagen\.ru$/.test(location.hostname)) {
-        window.ym(config.counterId, "reachGoal", config.contentGoal, { type: "gallery", page: safePath });
-      } else if (target.origin === location.origin && path !== safePath &&
+      if (target.origin === location.origin && path !== safePath &&
           config.contentPaths.some(prefix => path.startsWith(prefix))) {
         window.ym(config.counterId, "reachGoal", config.contentGoal, { type: "page", path });
       }

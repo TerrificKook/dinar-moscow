@@ -37,7 +37,7 @@ function contact(p) { return `<section class="contact-band" id="contact"><div cl
   ${button('Написать в Telegram','https://t.me/mrdinar',true)}</div>
   <div class="contact-aside"><p>Динар Динмухаметов<br><span>Ваш собеседник на всём пути</span></p>
   <div class="direct-links"><a href="https://t.me/mrdinar">Telegram @mrdinar ${arrow}</a><a href="tel:+79057011177">+7 (905) 701-11-77 ${arrow}</a><a href="mailto:db@dinardb.ru">db@dinardb.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
-  <p class="contact-note">Работаю с юридическими лицами. Макеты и файлы можно приложить в выбранном мессенджере.</p>
+  <p class="contact-note">Москва и Московская область. Работаю с юридическими лицами. Для начала достаточно описания изделия, размеров и количества. Не присылайте лишние персональные данные.</p>
 </div></section>`; }
 
 const home = `<div class="container">
@@ -47,7 +47,7 @@ const home = `<div class="container">
     <p class="hero-description">Разработка конструкции, изготовление образца и организация тиража. Помогу пройти путь от идеи до изделия — с подбором производства и контролем исполнения.</p>
     <p class="sample-entry">Разработку и образец можно заказать отдельно.</p>
     <div class="actions">${button('Обсудить задачу')}${textLink('Разработка и образец','#sample-development')}</div>
-    <p class="micro">По вашим размерам · можно начать без готового ТЗ</p>
+    <p class="micro">Москва и Московская область · можно начать без готового ТЗ</p>
   </div>
   <div class="solution-visual">${concept('./','white-insert','solution-image',true)}<p class="visual-note">Проверка перед тиражом.<br><em>Размеры, посадка товара, сборка.</em></p></div>
 </section>
@@ -135,7 +135,7 @@ for(const [slug,title,description,body] of pages){
 <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Меню <span aria-hidden="true">+</span></button>
 <nav id="navigation" aria-label="Основная навигация">${nav}<a class="nav-contact" href="#contact">Обсудить задачу ${arrow}</a></nav></header>
 <main id="main">${body}${contact(p)}</main>
-<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><a href="${p}privacy/">О данных на сайте</a></p></footer>
+<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><a href="${p}privacy/">Политика обработки данных</a></p></footer>
 </body></html>`;
   await mkdir(new URL(slug?slug+'/':'./',root),{recursive:true});
   await writeFile(new URL((slug?slug+'/':'')+'index.html',root),html);
