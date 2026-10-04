@@ -1,8 +1,8 @@
 "use strict";
 
-// Keep disabled until the RKN notification, processing details and consent notice are ready.
+// Owner-authorized release. Load the counter only after the visitor opts in.
 (() => {
-  const config = { enabled: false, counterId: 113163341, hosts: ["dinar.moscow", "www.dinar.moscow"], notice: "/privacy/analytics-consent/", contactGoal: "contact_click", contentGoal: "content_open", contentPaths: ["/kartonnye-korobki/", "/korobki-s-lozhementom/", "/shouboksy-displei/", "/kartonnye-stoyki/", "/articles/"] };
+  const config = { enabled: true, counterId: 113163341, hosts: ["dinar.moscow", "www.dinar.moscow"], notice: "/privacy/analytics-consent/", contactGoal: "contact_click", contentGoal: "content_open", contentPaths: ["/kartonnye-korobki/", "/korobki-s-lozhementom/", "/shouboksy-displei/", "/kartonnye-stoyki/", "/articles/"] };
   if (!config.enabled || !Number.isSafeInteger(config.counterId) ||
       !config.hosts.includes(location.hostname)) return;
 
