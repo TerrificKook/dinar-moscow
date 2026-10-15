@@ -36,7 +36,7 @@ function contact(p) { return `<section class="contact-band" id="contact"><div cl
   <p>Пришлите фото товара, размеры и вашу задачу.<br>Укажите, нужен образец или тираж. Готовое ТЗ необязательно.</p>
   ${button('Написать в Telegram','https://t.me/mrdinar',true)}</div>
   <div class="contact-aside"><p>Динар Динмухаметов<br><span>Ваш собеседник на всём пути</span></p>
-  <div class="direct-links"><a href="https://t.me/mrdinar">Telegram @mrdinar ${arrow}</a><a href="tel:+79057011177">+7 (905) 701-11-77 ${arrow}</a><a href="mailto:db@dinardb.ru">db@dinardb.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
+  <div class="direct-links"><a href="https://t.me/mrdinar">Telegram @mrdinar ${arrow}</a><a href="tel:+79057011177">+7 (905) 701-11-77 ${arrow}</a><a href="mailto:dindb@inbox.ru">dindb@inbox.ru ${arrow}</a><a href="https://max.ru/u/f9LHodD0cOKdKxpZWRTf6opqWFE4_FBbFln83YGEvx6yfmukrq7u5bdn0Wg">Написать в MAX ${arrow}</a></div></div>
   <p class="contact-note">Москва и Московская область. Работаю с юридическими лицами. Для начала достаточно описания изделия, размеров и количества. Не присылайте лишние персональные данные.</p>
 </div></section>`; }
 
@@ -128,14 +128,14 @@ for(const [slug,title,description,body] of pages){
 <meta property="og:url" content="https://dinar.moscow/${slug ? slug+'/' : ''}"><meta property="og:image" content="https://dinar.moscow/assets/${slug==='about'?'dinar-portrait-v04':products.find(item=>item.slug===slug)?.image||articles.find(item=>'articles/'+item.slug===slug)?.image||'white-insert'}.webp">
 <link rel="icon" href="${p}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${p}assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script><script src="${p}assets/consent-metrika.js" defer></script>
+<link rel="stylesheet" href="${p}assets/style.css"><script src="${p}assets/site.js" defer></script><script src="${p}assets/consent-metrika.js?v=20261015" defer></script>
 </head><body class="${slug.startsWith('articles/')?'article-page':slug||'home'}">
 <a class="skip" href="#main">К содержанию</a>
 <header class="header container"><a class="brand" href="${p}" aria-label="Динар — главная">Динар<span>.</span><small>Динмухаметов</small></a>
 <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" hidden>Меню <span aria-hidden="true">+</span></button>
 <nav id="navigation" aria-label="Основная навигация">${nav}<a class="nav-contact" href="#contact">Обсудить задачу ${arrow}</a></nav></header>
 <main id="main">${body}${contact(p)}</main>
-<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><a href="${p}privacy/">Политика обработки данных</a></p></footer>
+<footer class="footer container"><a class="brand" href="${p}">Динар<span>.</span></a><p>Упаковка и картонные дисплеи.<br>Личное ведение заказа.</p><p>© 2026 Динар Динмухаметов<br><a href="${p}privacy/">Политика обработки данных</a> · <a href="/privacy/analytics-consent/">Согласие на аналитику</a></p></footer>
 </body></html>`;
   await mkdir(new URL(slug?slug+'/':'./',root),{recursive:true});
   await writeFile(new URL((slug?slug+'/':'')+'index.html',root),html);

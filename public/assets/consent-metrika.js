@@ -5,10 +5,13 @@
   const config = { enabled: true, counterId: 113163341, hosts: ["dinar.moscow", "www.dinar.moscow"], notice: "/privacy/analytics-consent/", contactGoal: "contact_click", contentGoal: "content_open", contentPaths: ["/kartonnye-korobki/", "/korobki-s-lozhementom/", "/shouboksy-displei/", "/kartonnye-stoyki/", "/articles/"] };
   if (!config.enabled || !Number.isSafeInteger(config.counterId) ||
       !config.hosts.includes(location.hostname)) return;
+  const controllerKey = `__dinarMetrikaConsent${config.counterId}`;
+  if (window[controllerKey]) return;
+  window[controllerKey] = true;
 
   const key = "site_analytics_choice_v2";
   const optOutKey = "site_analytics_optout_v2";
-  const version = 2;
+  const version = 3;
   const lifetime = 180 * 24 * 60 * 60 * 1000; // Project setting, not a legal retention period.
   const disableKey = `disableYaCounter${config.counterId}`;
   const safePath = /^\/[a-z0-9/_.-]*$/i.test(location.pathname) &&
@@ -48,7 +51,7 @@
     if (fallbackDenied()) return "deny";
     try {
       const choice = JSON.parse(localStorage.getItem(key));
-      if (!choice || choice.version !== version ||
+      if (!choice || (choice.version !== version && !(Number.isInteger(choice.version) && choice.version >= 2 && choice.version < version && choice.status === "deny")) ||
           !["allow", "deny"].includes(choice.status) ||
           !Number.isFinite(choice.at) || !Number.isFinite(choice.until) ||
           choice.at > Date.now() || choice.until <= Date.now() ||
@@ -82,6 +85,8 @@
 
   function safeUrl() {
     if (!safePath) return null;
+    // The SDK can inspect the original fragment, not just the sanitized hit URL.
+    if (location.hash && (!/^#[a-z][a-z0-9_-]{0,79}$/i.test(location.hash) || /\d{7,}/.test(location.hash))) return null;
     const url = new URL(safePath, location.origin);
     const input = new URLSearchParams(location.search);
     // Fail closed on unknown query parameters: Metrika and Webvisor may inspect location.href.
